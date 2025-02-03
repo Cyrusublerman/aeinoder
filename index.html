@@ -1,43 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <!-- Ensure responsiveness on all devices -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modular Minimal Site with Base Styling</title>
-  <!-- Link to external CSS -->
+  <meta charset="utf-8">
+  <title>Portfolio &amp; Tools – [Your Name]</title>
+  <meta name="description" content="A portfolio, collection of tools, art, blog, and more by [Your Name].">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Optional: Include the Space Mono font from Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="calculator-container">
-    <!-- Modular components loaded via JavaScript -->
-    <div id="header"></div>
-    <div id="nav"></div>
-
-    <!-- Main content area -->
-    <main class="main-content">
-      <section class="box">
-        <h1>Welcome</h1>
-        <p>
-          This modular site marries a retro 90s-inspired aesthetic with modern responsive design principles.
-          The layout uses a classic, minimal design enriched by a robust, modular file structure.
-        </p>
-      </section>
-      <section class="box">
-        <h2>About</h2>
-        <p>
-          By separating header, navigation, and footer into individual files,
-          maintenance and future expansion become a breeze.
-        </p>
-      </section>
-    </main>
-
-    <div id="footer"></div>
+  <!-- Left Sidebar with collapsible navigation -->
+  <div class="sidebar">
+    <details id="navDetails" open>
+      <summary>Pages</summary>
+      <nav>
+        <ul>
+          <li><a href="#art">Art</a></li>
+          <li><a href="#objects">Objects</a></li>
+          <li><a href="#tools">Tools</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </details>
   </div>
 
-  <!-- Load the JavaScript module for dynamic component loading -->
-  <script src="js/components.js"></script>
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <header>
+      <h1>My Portfolio</h1>
+    </header>
+    <section id="art">
+      <h2>Art</h2>
+      <p>This section is dedicated to art and creative projects.</p>
+      <!-- Insert your art-related content here -->
+    </section>
+    <section id="objects">
+      <h2>Objects</h2>
+      <p>This section showcases portfolio projects and creative objects.</p>
+      <!-- Insert portfolio or project details here -->
+    </section>
+    <section id="tools">
+      <h2>Tools</h2>
+      <p>Here you will find a collection of tools and utilities I've developed.</p>
+      <!-- Insert tool descriptions and links here -->
+    </section>
+    <section id="about">
+      <h2>About</h2>
+      <p>Learn more about my background, interests, and the journey behind my work.</p>
+      <!-- Insert biographical or background details here -->
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>If you'd like to get in touch, please use the contact information provided.</p>
+      <!-- Insert contact form or details here -->
+    </section>
+  </div>
+
+  <script src="js/script.js"></script>
 </body>
 </html>

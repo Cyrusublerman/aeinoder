@@ -1,246 +1,89 @@
-/* Base rhythm and constants */
-:root {
-  --space-unit: 20px;
-  --space-half: calc(var(--space-unit) / 2);
-  --space-quarter: calc(var(--space-unit) / 4);
-  --space-double: calc(var(--space-unit) * 2);
-  --border-width: 1px;
-  --shadow-offset: 2px;
-  --font-size-base: 14px;
-  --line-height: var(--space-unit);
-}
-
-/* Base styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* Base Styles */
 body {
-  font-family: "Space Mono", monospace;
-  font-size: var(--font-size-base);
-  line-height: var(--line-height);
-  background-color: #f4f4f4;
-  padding: var(--space-unit);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #333;
+  display: flex;
   min-height: 100vh;
 }
 
-.calculator-container {
-  max-width: min(1400px, 95vw);
-  margin: 0 auto;
+/* Sidebar Styling */
+.sidebar {
+  background: #f9f9f9;
+  border-right: 1px solid #ddd;
+  width: 250px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* Title */
-h1 {
-  font-size: var(--font-size-base);
-  padding-bottom: var(--line-height);
-  margin-bottom: var(--line-height);
-  font-weight: normal;
-  border-bottom: var(--border-width) solid #000;
+.sidebar details {
+  margin-bottom: 20px;
 }
 
-/* Box styling */
-.box {
-  background: #fff;
-  border: var(--border-width) solid #000;
-  padding: var(--line-height);
-  margin-bottom: var(--line-height);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 rgba(0, 0, 0, 0.1);
-}
-
-/* Layout */
-.main-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--line-height);
-}
-
-/* Visualization */
-.visualization-column {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--line-height);
-}
-
-.visualization-box {
-  aspect-ratio: 1;
-  max-width: min(80vh, 100%);
-  margin: 0 auto;
-  padding: var(--line-height);
-}
-
-#polygon-display {
-  width: 100%;
-  height: 100%;
-  background: #fff;
-}
-
-/* Download Buttons */
-.download-buttons {
-  display: flex;
-  gap: var(--line-height);
-  justify-content: center;
-  margin: 0 auto;
-}
-
-.download-button {
-  font-family: "Space Mono", monospace;
-  font-size: var(--font-size-base);
-  background: #fff;
-  border: var(--border-width) solid #000;
-  padding: var(--space-half);
+.sidebar summary {
+  font-size: 1.2em;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 rgba(0, 0, 0, 0.1);
-  min-width: 120px;
-  text-align: center;
+  outline: none;
 }
 
-.download-button:hover {
-  background: #f0f0f0;
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 rgba(0, 0, 0, 0.05);
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
 }
 
-.download-button:active {
-  background: #e0e0e0;
-  box-shadow: none;
-  transform: translate(var(--shadow-offset), var(--shadow-offset));
+.sidebar nav li {
+  margin-bottom: 10px;
 }
 
-/* Measurements Table */
-.measurements-table {
-  width: 100%;
-  border-collapse: collapse;
+.sidebar nav a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1em;
 }
 
-.measurements-table + .measurements-table {
-  margin-top: var(--line-height);
-  border-top: var(--border-width) solid #eee;
-  padding-top: var(--line-height);
+.sidebar nav a:hover {
+  text-decoration: underline;
 }
 
-.measurements-table th,
-.measurements-table td {
-  padding: calc(var(--line-height) / 4);
-  height: var(--line-height);
-  text-align: center;
+/* Main Content Area Styling */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.measurements-table th {
-  font-weight: normal;
-  padding-bottom: var(--space-half);
-  border-bottom: var(--border-width) solid #000;
+.main-content header h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
 }
 
-.measurements-table td.row-header {
-  text-align: right;
-  white-space: nowrap;
-  width: 12ch;
+.main-content section {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
 }
 
-/* Inputs */
-input[type="number"] {
-  width: 12ch;
-  height: var(--line-height);
-  padding: var(--space-quarter) var(--space-half);
-  border: var(--border-width) solid #000;
-  font-family: inherit;
-  font-size: var(--font-size-base);
-  text-align: center;
+.main-content section h2 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
 }
 
-/* Align table inputs */
-.measurements-table input[type="number"] {
-  margin: 0 auto;
-  display: block;
-}
-
-/* Empty cells in first table */
-.measurements-table td:empty {
-  width: 12ch;
-}
-
-/* Glossary */
-.glossary {
-  margin-top: var(--line-height);
-}
-
-.glossary h2 {
-  font-size: var(--font-size-base);
-  margin-bottom: var(--line-height);
-  padding-bottom: var(--space-half);
-  font-weight: normal;
-  border-bottom: var(--border-width) solid #000;
-}
-
-.glossary section {
-  margin-bottom: var(--line-height);
-}
-
-.glossary h3 {
-  font-size: var(--font-size-base);
-  margin-bottom: var(--space-half);
-}
-
-.glossary pre {
-  font-family: inherit;
-  line-height: var(--line-height);
-  padding: var(--line-height);
-  background: #f8f8f8;
-  border: var(--border-width) solid #eee;
-}
-
-/* SVG styles */
-.grid-line {
-  stroke: #ccc;
-  stroke-width: 0.01;
-}
-
-.grid-marker {
-  stroke: #ccc;
-  stroke-width: 0.01;
-}
-
-.grid-label {
-  font-size: 0.1px;
-  text-anchor: middle;
-  fill: #666;
-}
-
-.intermediate-polygon {
-  fill: none;
-  stroke: #cccccc;
-  stroke-width: 0.01;
-}
-
-.main-polygon {
-  fill: none;
-  stroke: #000000;
-  stroke-width: 0.02;
-}
-
-.center-point {
-  fill: #000;
-}
-
-/* Responsive Layout */
-@media (min-width: 1024px) {
+/* Responsive Adjustments */
+@media (max-width: 800px) {
+  body {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
   .main-content {
-    flex-direction: row;
-  }
-
-  .visualization-column {
-    flex: 0 0 min(45%, 80vh);
-  }
-
-  .controls-column {
-    flex: 1;
-    padding-left: var(--line-height);
-  }
-
-  .visualization-column .box {
-    margin: 0;
+    margin-left: 0;
   }
 }
