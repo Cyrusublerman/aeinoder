@@ -1,61 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Portfolio &amp; Tools – [Your Name]</title>
-  <meta name="description" content="A portfolio, collection of tools, art, blog, and more by [Your Name].">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="utf-8">
+    <title>Portfolio & Tools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Space+Mono:wght@400;700&family=Syne+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Left Sidebar with collapsible navigation -->
-  <div class="sidebar">
-    <details id="navDetails" open>
-      <summary>Pages</summary>
-      <nav>
-        <ul>
-          <li><a href="#art">Art</a></li>
-          <li><a href="#objects">Objects</a></li>
-          <li><a href="#tools">Tools</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </details>
-  </div>
+    <aside class="sidenav">
+        <details open>
+            <summary class="nav-toggle">≡ Minimise links</summary>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#objects">Objects</a></li>
+                    <li><a href="#art">Art</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </details>
+    </aside>
 
-  <!-- Main Content Area -->
-  <div class="main-content">
-    <header>
-      <h1>My Portfolio</h1>
-    </header>
-    <section id="art">
-      <h2>Art</h2>
-      <p>This section is dedicated to art and creative projects.</p>
-      <!-- Insert your art-related content here -->
-    </section>
-    <section id="objects">
-      <h2>Objects</h2>
-      <p>This section showcases portfolio projects and creative objects.</p>
-      <!-- Insert portfolio or project details here -->
-    </section>
-    <section id="tools">
-      <h2>Tools</h2>
-      <p>Here you will find a collection of tools and utilities I've developed.</p>
-      <!-- Insert tool descriptions and links here -->
-    </section>
-    <section id="about">
-      <h2>About</h2>
-      <p>Learn more about my background, interests, and the journey behind my work.</p>
-      <!-- Insert biographical or background details here -->
-    </section>
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>If you'd like to get in touch, please use the contact information provided.</p>
-      <!-- Insert contact form or details here -->
-    </section>
-  </div>
+    <div class="grid-container">
+        <h1>Portfolio & Tools</h1>
 
-  <script src="js/script.js"></script>
+        <section id="about" class="module module--full-width">
+            <h2>About</h2>
+            <div class="article two-column">
+                <p>Welcome to my portfolio and workspace. Here you'll find a collection of my work, projects, and creative endeavors.</p>
+                <p>I focus on creating innovative solutions across various domains, from software development to artistic experiments.</p>
+            </div>
+        </section>
+
+        <section id="projects" class="module module--half-width">
+            <h2>Projects</h2>
+            <div class="article single-column">
+                <p>A showcase of my major development projects and collaborations.</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="objects" class="module module--half-width">
+            <h2>Objects</h2>
+            <div class="article single-column">
+                <p>Physical and digital objects I've created or designed.</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="art" class="module module--half-width">
+            <h2>Art</h2>
+            <div class="article single-column">
+                <p>A collection of my artistic works and experiments.</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="module module--half-width">
+            <h2>Tools</h2>
+            <div class="article single-column">
+                <p>Useful tools and utilities I've developed.</p>
+                <div class="gallery-grid">
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="module module--full-width">
+            <h2>Contact</h2>
+            <div class="article two-column">
+                <p>Get in touch via:</p>
+                <ul>
+                    <li>Email: contact@example.com</li>
+                    <li>GitHub: @username</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
