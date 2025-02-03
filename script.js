@@ -1,141 +1,133 @@
-/**
- * SiteOrFlight
- * A brief overview: This code seems to be building a website interface that fetches content from GitHub, 
- * has a dynamically adjusting typography based on the container's aspect ratio, and a folder structure that 
- * represents documents and a contact form.
- */
-
-/* =======================
-   Component: GitHub Fetch
-   ======================= */
-document.addEventListener('DOMContentLoaded', function() {
-    /**
-     * Fetches Markdown files from GitHub and injects them into the container.
-     */
-    fetch('https://api.github.com/repos/Cyrusublerman/SiteOrFlight/contents/folder_structure')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(file => {
-                fetch(file.download_url)
-                    .then(response => response.text())
-                    .then(text => {
-                        const html = new showdown.Converter().makeHtml(text);
-                        document.getElementById('container').innerHTML += html;
-                    });
-            });
-        });
-});
-
-/* =============================
-   Component: Dynamic Typography
-   ============================= */
-function generateTypographyStyles(container) {
-    // Calculates typography styles based on container's aspect ratio
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-    const AR = width / height;
-    const BaseSize = 16;
-    const ARFactor = 5;
-    const primaryFontSize = BaseSize + (ARFactor * AR);
-    let styles = `.container { font-size: ${primaryFontSize}px; }`;
-
-    const growthFactor = 1.1;
-    const baseValues = [primaryFontSize, 1.6, 700];
-    for (let s = 1; s <= 6; s++) {
-        const fontSize = baseValues[0] * (2 / Math.pow(growthFactor, s - 1));
-        const lineHeight = baseValues[1] + 0.05 * (s - 1);
-        const fontWeight = baseValues[2] - (s - 1) * 100;
-        styles += `
-            h${s} {
-                font-size: ${fontSize}px;
-                line-height: ${lineHeight};
-                font-weight: ${fontWeight};
-            }
-        `;
+const config = {
+    targetBU: 16, // Base unit in pixels
+    bodyFont: 'Syne Mono',
+    maxContainerWidth: 1200, // Maximum container width
+    minContainerWidth: 300,  // Minimum container width
+    componentSizes: {
+      h1: 6 / 1,
+      h2: 6 / 2,
+      h3: 6 / 3,
+      h4: 6 / 4,
+      h5: 6 / 5,
+      h6: 6 / 6,
+      p: 1,
+    },
+    fontWidthRatios: {
+      'Rubik Mono One': 0.85,
+      'Space Mono': 0.61,
+      'Syne Mono': 0.55,
+    },
+  };
+  
+  function calculateBaseUnit(containerWidth) {
+    return Math.min(containerWidth * 0.01, config.targetBU); // Base unit = 1% of container width, capped
+  }
+  
+  function adjustTypography(baseUnit, containerWidth) {
+    // Adjust typography dynamically
+    Object.entries(config.componentSizes).forEach(([tag, multiplier]) => {
+      document.querySelectorAll(tag).forEach((element) => {
+        const fontFamily = window
+          .getComputedStyle(element)
+          .fontFamily.split(',')[0]
+          .replace(/['"]/g, '');
+        const fontRatio = config.fontWidthRatios[fontFamily] || 1;
+  
+        const fontSize = (baseUnit * multiplier) / fontRatio;
+        element.style.fontSize = `${fontSize}px`;
+        element.style.lineHeight = `${fontSize * 1.25}px`;
+  
+        // Add internal padding
+        element.style.padding = `${baseUnit * 0.5}px`;
+      });
+    });
+  
+    // Adjust title
+    const title = document.querySelector('.grid-title');
+    if (title) {
+      const titleFontSize = Math.min(containerWidth / title.textContent.length, baseUnit * 3);
+      title.style.fontSize = `${titleFontSize}px`;
+      title.style.lineHeight = `${titleFontSize * 1.1}px`;
+      title.style.marginBottom = `${baseUnit}px`;
+  
+      // Align title edges with container edges
+      title.style.width = `${containerWidth}px`;
+      title.style.margin = '0 auto';
     }
-    return styles;
-}
-
-function applyTypographyStyles(container) {
-    // Applies generated typography styles to the site
-    const styles = generateTypographyStyles(container);
-    const styleElement = document.createElement('style');
-    styleElement.type = 'text/css';
-    styleElement.appendChild(document.createTextNode(styles));
-    document.head.appendChild(styleElement);
-}
-applyTypographyStyles(document.querySelector('.container'));
-
-/* ===========================
-   Component: Folder Structure
-   =========================== */
-const folderStructureElement = document.getElementById("folder-structure");
-const mainContentElement = document.getElementById("markdown-content");
-
-// Placeholder structure for folders
-for (let i = 1; i <= 3; i++) {
-    const folderElement = document.createElement("div");
-    folderElement.className = "folder";
-    folderElement.textContent = `Folder ${i}`;
-
-    const documentList = document.createElement("div");
-    documentList.className = "document-list";
-    folderElement.appendChild(documentList);
-    folderElement.addEventListener("click", function(event) {
-        if (event.target === this) {
-            this.classList.toggle("open");
-        }
+  }
+  
+  function adjustModuleLayout(baseUnit, containerWidth) {
+    const gutterWidth = baseUnit * 1.5; // Gutters = 1.5 BU
+    const borderWidth = baseUnit * 0.2; // Borders = 0.2 BU
+    const padding = baseUnit * 1; // Padding = 1 BU
+    const fullWidth = containerWidth - 2 * borderWidth;
+    const halfWidth = (fullWidth - gutterWidth) / 2;
+  
+    // Adjust grid container
+    const gridContainer = document.querySelector('.grid-container');
+    if (gridContainer) {
+      gridContainer.style.maxWidth = `${config.maxContainerWidth}px`;
+      gridContainer.style.minWidth = `${config.minContainerWidth}px`;
+      gridContainer.style.margin = '0 auto';
+      gridContainer.style.borderWidth = `${borderWidth}px`;
+      gridContainer.style.padding = '0';
+    }
+  
+    // Adjust modules
+    document.querySelectorAll('.module').forEach((module) => {
+      module.style.borderWidth = `${borderWidth}px`;
+      module.style.marginTop = `-${borderWidth}px`;
+      module.style.marginLeft = `-${borderWidth}px`;
+      module.style.padding = `${padding}px`;
     });
-    folderStructureElement.appendChild(folderElement);
-}
-
-/* =======================
-   Component: Contact Form
-   ======================= */
-const contactMeFolder = document.getElementById("contact-me-folder");
-contactMeFolder.addEventListener("click", function() {
-    mainContentElement.innerHTML = "";
-    mainContentElement.appendChild(createContactForm());
-
-    const contactForm = document.getElementById("contact-form");
-    contactForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
-    
-        if (name && email && message) {
-            console.log(`Sending message from ${name} (${email}): ${message}`);
-        }
+  
+    // Full-width modules
+    document.querySelectorAll('.module--full-width').forEach((module) => {
+      module.style.width = `${fullWidth}px`;
     });
-});
-
-function createContactForm() {
-    // Generates a basic contact form
-    const form = document.createElement("form");
-    form.id = "contact-form";
-    form.innerHTML = `
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="email" id="email" placeholder="Your Email" required>
-        <textarea id="message" placeholder="Your Message" required></textarea>
-        <button type="submit">Send</button>
-    `;
-    return form;
-}
-
-/* ============================
-   Component: Folder Toggle UI
-   ============================ */
-const toggleFoldersButton = document.getElementById("toggle-folders");
-let allFoldersOpen = false;
-toggleFoldersButton.addEventListener("click", function() {
-    const folders = document.querySelectorAll(".folder");
-    allFoldersOpen = !allFoldersOpen;
-    folders.forEach(folder => {
-        if (allFoldersOpen) {
-            folder.classList.add("open");
-        } else {
-            folder.classList.remove("open");
-        }
+  
+    // Half-width modules
+    document.querySelectorAll('.module--half-width').forEach((module, index) => {
+      module.style.width = `${halfWidth}px`;
+      module.style.display = 'inline-block'; // Use inline-block for proper alignment
+      module.style.verticalAlign = 'top'; // Align modules vertically
+      module.style.margin = `0 ${gutterWidth / 2}px`; // Add gutters symmetrically
     });
-});
+  
+    // Adjust gallery items
+    document.querySelectorAll('.gallery-item').forEach((item) => {
+      item.style.borderWidth = `${borderWidth}px`;
+      item.style.marginTop = `-${borderWidth}px`;
+      item.style.marginLeft = `-${borderWidth}px`;
+      item.style.padding = `${padding}px`;
+    });
+  
+    // Adjust footer
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.style.padding = `${baseUnit * 1.5}px`;
+      footer.style.borderTopWidth = `${borderWidth}px`;
+    }
+  }
+  
+  function adjustLayout() {
+    const container = document.querySelector('.grid-container');
+    if (!container) return;
+  
+    const containerWidth = Math.min(
+      Math.max(container.offsetWidth, config.minContainerWidth),
+      config.maxContainerWidth
+    );
+    const baseUnit = calculateBaseUnit(containerWidth);
+  
+    adjustModuleLayout(baseUnit, containerWidth);
+    adjustTypography(baseUnit, containerWidth);
+  }
+  
+  // Event listeners for layout adjustments
+  window.addEventListener('resize', () => {
+    clearTimeout(window.layoutResizeTimeout);
+    window.layoutResizeTimeout = setTimeout(adjustLayout, 150);
+  });
+  document.addEventListener('DOMContentLoaded', adjustLayout);
+  

@@ -1,125 +1,108 @@
-/* ====================
-   UNIVERSAL STYLES
-   ==================== */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+/* General styling */
 body {
-  font-family: Tahoma, Verdana, sans-serif;
-  line-height: 1.6;
-  font-size: 100%;
-  margin: 0;
-  padding: 0;
+  font-family: 'Syne Mono', monospace;
+  background-color: #ffffff;
+  color: #000000;
+  margin: 0 auto;
 }
 
-/* ====================
-   LAYOUT AND STRUCTURE
-   ==================== */
-
-/* Left Margin Styling */
-#left-margin {
-  position: fixed;
-  top: 10px;
-  bottom: 0;
-  left: 0;
-  width: calc(20ch);
-  z-index: 1;
-  overflow-y: auto;
-  padding: 1em;
-  font-variant: small-caps;
-  font-style: oblique;
-  font-weight: bold;
+/* Grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  border-style: solid;
+  border-color: #000000;
+  /* Width, margins, and gaps dynamically calculated in JS */
 }
 
-/* Title Styling */
-#title {
-  font-size: 3em;
-  font-weight: bold;
-  line-height: 0.8;
-  margin-bottom: 0.5em;
+/* Modules */
+.module {
+  border-style: solid;
+  border-color: #000000;
+  box-sizing: border-box;
+  /* Margins, padding, and sizes dynamically calculated in JS */
 }
 
-/* Main Container Styling */
-#main-container {
-  margin-top: 100px;
-  margin-left: 20em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 100px);
+.module--full-width {
+  grid-column: 1 / -1; /* Full width across columns */
 }
 
-/* Content Styling */
-#markdown-content,
-#contact-form {
-  width: 80%;
+.module--half-width {
+  float: left; /* Align to left or right based on JS logic */
+  /* Width and margins dynamically calculated in JS */
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6, p {
+  font-family: 'Syne Mono', monospace;
+  /* Font sizes and line heights dynamically calculated in JS */
+}
+
+h1 {
+  font-family: 'Rubik Mono One', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Space Mono', monospace;
+}
+
+.grid-title {
   text-align: center;
-}
-
-/* ====================
-   COMPONENT STYLES
-   ==================== */
-
-/* Folder and Document Styling */
-.folder,
-.document {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-}
-
-/* Document List Styling */
-.document-list {
-  max-height: 0;
+  font-family: 'Rubik Mono One', sans-serif;
+  white-space: nowrap;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
-  padding-left: 2em;
+  text-overflow: ellipsis;
+  /* Font size and margins dynamically calculated in JS */
 }
 
-/* Folder Opening Animation */
-.folder.open .document-list {
-  max-height: 100vh;
+/* Two-column layout */
+.two-column {
+  column-count: 2;
+  /* Column gaps dynamically calculated in JS */
 }
 
-/* ====================
-   CONTACT FORM STYLES
-   ==================== */
-
-#contact-form input,
-#contact-form textarea,
-#contact-form button {
-  width: 70%;
-  margin: 10px auto;
-  border: 1px solid black;
-  padding: 0.5em;
-  outline: none;
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Gaps dynamically calculated in JS */
 }
 
-#contact-form textarea {
-  min-height: 200px;
-  resize: vertical;
+.gallery-item {
+  aspect-ratio: 1 / 1;
+  border-style: solid;
+  border-color: #000000;
+  box-sizing: border-box;
+  /* Margins dynamically calculated in JS */
 }
 
-#contact-form button {
-  cursor: pointer;
+/* Footer */
+footer {
+  text-align: center;
+  border-top-style: solid;
+  border-color: #000000;
+  /* Padding and border width dynamically calculated in JS */
 }
 
-#toggle-folders {
-  margin-bottom: 1em;
-}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* Single-column layout */
+  }
 
-/* ====================
-   LINK STYLES
-   ==================== */
+  .module--half-width {
+    width: 100%; /* Ensure modules stack */
+    float: none;
+  }
 
-a {
-  background-color: black;
-  color: white;
-  padding: 2px 5px;
-  text-decoration: none;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-a:hover {
-  background-color: white;
-  color: black;
+  .two-column {
+    column-count: 1; /* Reduce to single column */
+  }
 }

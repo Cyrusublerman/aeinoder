@@ -1,23 +1,58 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Web Page</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Design Principles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=Space+Mono:wght@400;700&family=Syne+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="left-margin">
-    <div id="title">My Web Page</div>
-    <div id="folder-structure">
-      <!-- Folders and documents will be populated here by JavaScript -->
+  <header>
+            <h1 class="grid-title">Swiss Design Principles</h1>
+        </header>
+    <div id="container" class="grid-container">
+        
+        <main>
+            <section class="module module--full-width">
+                <h2>Typography Showcase</h2>
+                <div class="article">
+                    <h1>H1: <span class="bu-count"></span> BU wide</h1>
+                    <h2>H2: <span class="bu-count"></span> BU wide</h2>
+                    <h3>H3: <span class="bu-count"></span> BU wide</h3>
+                    <h4>H4: <span class="bu-count"></span> BU wide</h4>
+                    <h5>H5: <span class="bu-count"></span> BU wide</h5>
+                    <h6>H6: <span class="bu-count"></span> BU wide</h6>
+                    <p>P: <span class="bu-count"></span> BU wide</p>
+                </div>
+            </section>
+            <section class="module module--full-width">
+                <h2>Two-Column Article Layout</h2>
+                <div class="article two-column">
+                    <p>This article utilizes a two-column layout within the full page width. It demonstrates how content can be organized efficiently using our grid system, improving readability and visual flow.</p>
+                    <p>The left column could contain the main content, while the right column might be used for supporting information, pull quotes, or additional details. This layout is particularly effective for longer articles or when presenting complex information that benefits from a side-by-side comparison.</p>
+                </div>
+            </section>
+            <div class="module module--half-width">
+                <h2>Image Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                    <div class="gallery-item"></div>
+                </div>
+            </div>
+            <div class="module module--half-width">
+                <h2>Single-Column Article</h2>
+                <div class="article">
+                    <p>This single-column article demonstrates how content can be laid out in a narrower width, which is particularly useful for focused reading or when placed alongside other elements like our gallery.</p>
+                </div>
+            </div>
+        </main>
+
     </div>
-    <div id="contact-me-folder">Contact Me</div>
-    <button id="toggle-folders">Expand</button>
-  </div>
-  <div id="main-container">
-    <div id="markdown-content">
-      <!-- Markdown content will be loaded here -->
-    </div>
-  </div>
+          <footer>
+            <p>&copy; 2024 Swiss Design Principles. All rights reserved.</p>
+        </footer>
+    <script src="script.js"></script>
 </body>
 </html>
